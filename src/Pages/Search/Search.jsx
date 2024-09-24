@@ -24,11 +24,17 @@ export function Search(){
       const response = await api.get(`/${cep}/json`);
       setCepUser(response.data);
       Keyboard.dismiss();
-      
+
 
     } catch(error){
       console.log('ERROR', + error);
     }
+  }
+
+  function clear(){
+    setCep('');
+    setCepUser('');
+    inputRef.current.focus();
   }
 
   return(
@@ -50,9 +56,9 @@ export function Search(){
                 Buscar
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={retornarHome} style={styles.returnBtn}> 
+            <TouchableOpacity onPress={clear} style={styles.clearnBtn}> 
               <Text style={styles.textoSearch}>
-                Voltar
+                Limpar
               </Text>
             </TouchableOpacity>
           </View>
@@ -66,6 +72,11 @@ export function Search(){
             <Text style={styles.textoContainerResultado}>Logradouro: {cepUser.logradouro}</Text>
           </View>
         )}
+      <TouchableOpacity onPress={retornarHome} style={styles.returnBtn}> 
+        <Text style={styles.textoReturnHome}>
+          Voltar
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   )
 }
@@ -110,8 +121,8 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 4,
   },
-  returnBtn: {
-    backgroundColor: '#ff6c37',
+  clearnBtn: {
+    backgroundColor: '#ff0101',
     width: 80,
     height: 30,
     borderRadius: 4,
@@ -133,5 +144,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     marginBottom: 10,
+
   },
+  returnBtn: {
+    paddingTop: 10,
+    width: '30%',
+  },
+  textoReturnHome: {
+    backgroundColor: '#ff6c37',
+    padding: 10,
+    borderRadius: 4,
+    textAlign: 'center',
+    color: '#f9f9f9',
+   
+  }
 })
